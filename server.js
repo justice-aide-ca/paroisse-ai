@@ -1,3 +1,4 @@
+// Version avec route /api/pays - 22 juin 2026
 require('dotenv').config();
 
 const express = require('express');
