@@ -424,35 +424,57 @@ const translations = {
 
 function changeLanguage(lang) {
     const t = translations[lang] || translations.fr;
-    document.querySelector('.badge').textContent = t.badge;
-    document.querySelector('h1').textContent = t.title;
-    document.querySelector('.subtitle').textContent = t.subtitle;
-    document.querySelector('.info-box strong').textContent = t.info_title;
-    document.querySelector('.info-box p').textContent = t.info_text;
-    document.querySelector('label[for="pays"]').textContent = t.label_pays;
-    document.querySelector('label[for="diocese"]').textContent = t.label_diocese;
-    document.querySelector('label[for="unite"]').textContent = t.label_unite;
-    document.querySelector('label[for="paroisse"]').textContent = t.label_paroisse;
-    document.querySelector('label[for="typeDemande"]').textContent = t.label_type;
-    document.querySelector('label[for="contexte"]').textContent = t.label_contexte;
-    document.querySelector('label[for="besoin"]').textContent = t.label_besoin;
-    document.querySelector('label[for="nom"]').textContent = t.label_nom;
-    document.querySelector('label[for="date"]').textContent = t.label_date;
-    document.getElementById('submitBtn').textContent = t.button;
-    document.querySelector('.footer').textContent = t.footer;
-    document.getElementById('diocese').placeholder = t.placeholder_diocese;
-    document.getElementById('unite').placeholder = t.placeholder_unite;
-    document.getElementById('paroisse').placeholder = t.placeholder_paroisse;
-    document.getElementById('contexte').placeholder = t.placeholder_contexte;
-    document.getElementById('besoin').placeholder = t.placeholder_besoin;
-    document.getElementById('nom').placeholder = t.placeholder_nom;
-    document.querySelector('.pastoral-note').innerHTML = t.pastoral_note;
-}
+    
+    const elements = {
+        badge: document.querySelector('.badge'),
+        title: document.querySelector('h1'),
+        subtitle: document.querySelector('.subtitle'),
+        infoTitle: document.querySelector('.info-box strong'),
+        infoText: document.querySelector('.info-box p'),
+        paysLabel: document.querySelector('label[for="pays"]'),
+        dioceseLabel: document.querySelector('label[for="diocese"]'),
+        uniteLabel: document.querySelector('label[for="unite"]'),
+        paroisseLabel: document.querySelector('label[for="paroisse"]'),
+        typeLabel: document.querySelector('label[for="typeDemande"]'),
+        contexteLabel: document.querySelector('label[for="contexte"]'),
+        besoinLabel: document.querySelector('label[for="besoin"]'),
+        nomLabel: document.querySelector('label[for="nom"]'),
+        dateLabel: document.querySelector('label[for="date"]'),
+        submitBtn: document.getElementById('submitBtn'),
+        footer: document.querySelector('.footer'),
+        pastoralNote: document.querySelector('.pastoral-note'),
+        nomInput: document.getElementById('nom'),
+        contexteInput: document.getElementById('contexte'),
+        besoinInput: document.getElementById('besoin'),
+        dioceseInput: document.getElementById('diocese'),
+        uniteInput: document.getElementById('unite'),
+        paroisseInput: document.getElementById('paroisse')
+    };
 
-document.getElementById('languageSelector').addEventListener('change', function() {
-    changeLanguage(this.value);
-});
-changeLanguage('fr');
+    if (elements.badge) elements.badge.textContent = t.badge;
+    if (elements.title) elements.title.textContent = t.title;
+    if (elements.subtitle) elements.subtitle.textContent = t.subtitle;
+    if (elements.infoTitle) elements.infoTitle.textContent = t.info_title;
+    if (elements.infoText) elements.infoText.textContent = t.info_text;
+    if (elements.paysLabel) elements.paysLabel.textContent = t.label_pays;
+    if (elements.dioceseLabel) elements.dioceseLabel.textContent = t.label_diocese;
+    if (elements.uniteLabel) elements.uniteLabel.textContent = t.label_unite;
+    if (elements.paroisseLabel) elements.paroisseLabel.textContent = t.label_paroisse;
+    if (elements.typeLabel) elements.typeLabel.textContent = t.label_type;
+    if (elements.contexteLabel) elements.contexteLabel.textContent = t.label_contexte;
+    if (elements.besoinLabel) elements.besoinLabel.textContent = t.label_besoin;
+    if (elements.nomLabel) elements.nomLabel.textContent = t.label_nom;
+    if (elements.dateLabel) elements.dateLabel.textContent = t.label_date;
+    if (elements.submitBtn) elements.submitBtn.textContent = t.button;
+    if (elements.footer) elements.footer.textContent = t.footer;
+    if (elements.pastoralNote) elements.pastoralNote.innerHTML = t.pastoral_note;
+    if (elements.nomInput) elements.nomInput.placeholder = t.placeholder_nom;
+    if (elements.contexteInput) elements.contexteInput.placeholder = t.placeholder_contexte;
+    if (elements.besoinInput) elements.besoinInput.placeholder = t.placeholder_besoin;
+    if (elements.dioceseInput) elements.dioceseInput.placeholder = t.placeholder_diocese;
+    if (elements.uniteInput) elements.uniteInput.placeholder = t.placeholder_unite;
+    if (elements.paroisseInput) elements.paroisseInput.placeholder = t.placeholder_paroisse;
+}
 
 // ===== CHARGER LES PAYS =====
 async function loadPays() {
