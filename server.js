@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const express = require('express');
@@ -55,16 +56,16 @@ app.post('/api/submit-paroisse-request', async (req, res) => {
     const promptLang = languageNames[language] || 'français';
 
     const prompt = `
-Tu es un assistant pastoral pour le diocèse d'Edmundston (Nouveau-Brunswick, Canada), en lien avec la Conférence des Évêques du Canada (CECC).
+Tu es un assistant pastoral universel, mais tu respectes scrupuleusement la pratique pastorale de chaque diocèse et conférence épiscopale.
 
-📜 **PRINCIPES PASTORAUX FONDÉS SUR LA DÉCLARATION DE LA CECC (10 JUIN 2026)** :
-
-1. **Vie humaine** : Toute vie humaine est un don de Dieu, dotée d'une dignité et d'une valeur profondes, et ce, jusqu'à son terme naturel.
-2. **AMM / Euthanasie** : L'Église affirme que l'euthanasie et le suicide assisté, quels qu'en soient les motifs, consistent à provoquer ou à hâter intentionnellement la mort. De tels actes ne peuvent en aucun cas être moralement acceptables.
-3. **Accompagnement compatissant** : La véritable compassion ne répond pas à la souffrance en provoquant la mort, mais elle accompagne les personnes qui souffrent en leur apportant de l'espoir, une présence, des soins palliatifs et un soulagement de la douleur.
-4. **Communauté de guérison** : L'Église est appelée à devenir une "communauté de guérison" pour les plus faibles et les plus vulnérables.
+📜 **PRINCIPE FONDAMENTAL** :
+- La pastorale n'est pas universelle. Elle est définie par l'évêque du diocèse et la conférence épiscopale du pays.
+- Tu ne remplaces jamais l'évêque, le prêtre ou le conseil pastoral.
+- Tu renvoies toujours vers les autorités locales pour les décisions et les orientations.
 
 **CONTEXTE DE LA DEMANDE** :
+Pays: ${pays}
+Diocèse: ${diocese}
 Unité pastorale: ${unite}
 Paroisse: ${paroisse}
 Type de demande: ${typeDemande}
@@ -76,13 +77,11 @@ Date souhaitée: ${date}
 Langue: ${promptLang}
 
 **STRUCTURE DE TA RÉPONSE** :
-1. **ACCUEIL ET ÉCOUTE** : Accueille la personne avec bienveillance et compassion. Reconnais sa souffrance ou celle de ses proches.
-2. **ÉCLAIRAGE PASTORAL** : Rappelle la doctrine de l'Église sur la vie et la dignité humaine, en t'appuyant sur la déclaration de la CECC. Sois clair sur la position de l'Église concernant l'aide médicale à mourir.
-3. **ACCOMPAGNEMENT COMPATISSANT** : Propose des démarches concrètes pour accompagner la personne dans l'épreuve. Offre une présence fraternelle, le sacrement des malades comme source de force et de paix, et oriente vers les ressources en soins palliatifs pour un accompagnement de la douleur et de la souffrance. Propose également la prière et une rencontre avec le prêtre pour un soutien personnalisé.
-4. **RESSOURCES** : Mentionne les ressources du diocèse et de la CECC.
-5. **CONTACTS UTILES** : 
-   - Pour contacter un prêtre, veuillez appeler le secrétariat de votre paroisse.
-   - Le secrétariat vous mettra en relation avec un prêtre disponible pour un accompagnement pastoral, une confession, un sacrement des malades ou toute autre demande spirituelle.
+1. **ACCUEIL ET ÉCOUTE** : Accueille la personne avec bienveillance.
+2. **ÉCLAIRAGE GÉNÉRAL** : Rappelle les grands principes de l'Église, sans entrer dans des orientations locales spécifiques.
+3. **RENVOI VERS L'AUTORITÉ LOCALE** : Indique que la pratique pastorale précise relève de l'évêque du diocèse et de la conférence épiscopale.
+4. **ACCOMPAGNEMENT PROPOSÉ** : Propose des démarches spirituelles (prière, sacrement, rencontre avec un prêtre).
+5. **CONTACTS UTILES** : Renvoie vers le secrétariat de la paroisse, le diocèse, les services pastoraux locaux.
 `;
 
     try {
@@ -180,7 +179,7 @@ app.get('/contact', (req, res) => {
 // ===== DÉMARRAGE =====
 const server = app.listen(PORT, () => {
     console.log(`⛪ Paroisse AI sur http://localhost:${PORT}`);
-    console.log('📋 Pastorale de soins - Diocèse d\'Edmundston');
+    console.log('📋 Service pastoral universel');
 }).on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
         console.error(`❌ Port ${PORT} déjà utilisé.`);
