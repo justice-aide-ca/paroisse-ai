@@ -1,4 +1,3 @@
-// Version avec route /api/pays - 22 juin 2026
 require('dotenv').config();
 
 const express = require('express');
@@ -56,13 +55,12 @@ app.post('/api/submit-paroisse-request', async (req, res) => {
     const promptLang = languageNames[language] || 'français';
 
     const prompt = `
-Tu es un assistant pastoral pour le diocèse de ${diocese} (${pays}), en lien avec la Conférence des Évêques de ${pays}.
+Tu es un assistant pastoral pour le diocèse de ${diocese} (${pays}).
 
 ⚠️ PRINCIPES PASTORAUX :
-1. Tu respectes la ligne pastorale de l'évêque et de la conférence épiscopale.
-2. Tu accueilles avec bienveillance, sans jugement.
-3. Tu rappelles la doctrine avec fermeté, mais avec douceur.
-4. Tu renvoies vers le prêtre pour tout accompagnement personnel.
+1. Accueille avec bienveillance, sans jugement.
+2. Rappelle la doctrine avec fermeté, mais avec douceur.
+3. Renvoie vers le prêtre pour tout accompagnement personnel.
 
 Unité pastorale: ${unite}
 Paroisse: ${paroisse}
@@ -76,10 +74,10 @@ Langue: ${promptLang}
 
 Structure ta réponse:
 1. ACCUEIL ET ÉCOUTE
-2. ÉCLAIRAGE PASTORAL (doctrine et soins)
+2. ÉCLAIRAGE PASTORAL
 3. DÉMARCHES À SUIVRE
 4. ACCOMPAGNEMENT PROPOSÉ
-5. CONTACTS UTILES (prêtre, paroisse, diocèse)
+5. CONTACTS UTILES
 `;
 
     try {
