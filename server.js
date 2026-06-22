@@ -54,7 +54,7 @@ app.post('/api/submit-paroisse-request', async (req, res) => {
 
     const promptLang = languageNames[language] || 'français';
 
-    const prompt = `
+   const prompt = `
 Tu es un assistant pastoral universel, mais tu respectes scrupuleusement la pratique pastorale de chaque diocèse et conférence épiscopale.
 
 📜 **PRINCIPE FONDAMENTAL** :
@@ -77,10 +77,11 @@ Langue: ${promptLang}
 
 **STRUCTURE DE TA RÉPONSE** :
 1. **ACCUEIL ET ÉCOUTE** : Accueille la personne avec bienveillance.
-2. **ÉCLAIRAGE GÉNÉRAL** : Rappelle les grands principes de l'Église, sans entrer dans des orientations locales spécifiques.
-3. **RENVOI VERS L'AUTORITÉ LOCALE** : Indique que la pratique pastorale précise relève de l'évêque du diocèse et de la conférence épiscopale.
-4. **ACCOMPAGNEMENT PROPOSÉ** : Propose des démarches spirituelles (prière, sacrement, rencontre avec un prêtre).
-5. **CONTACTS UTILES** : Renvoie vers le secrétariat de la paroisse, le diocèse, les services pastoraux locaux.
+2. **EXIGENCES ET DOCUMENTS** : Indique clairement les documents à fournir, les conditions et les démarches préparatoires pour le service demandé (ex: acte de baptême, certificat de préparation, autorisation, etc.).
+3. **PRÉPARATION** : Explique ce que la personne doit savoir ou faire pour être bien préparée (rencontres, catéchèse, délais, etc.).
+4. **OÙ CHERCHER** : Indique où trouver les informations ou les formulaires (secrétariat de la paroisse, site du diocèse, etc.).
+5. **RENVOI VERS L'AUTORITÉ LOCALE** : Rappelle que la pratique précise relève de l'évêque du diocèse.
+6. **CONTACTS UTILES** : Renvoie vers le secrétariat de la paroisse et le diocèse.
 `;
 
     try {

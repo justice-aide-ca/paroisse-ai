@@ -191,20 +191,21 @@
         <div class="form-group">
             <label for="typeDemande">📋 Type de demande</label>
             <select id="typeDemande" required>
-                <option value="">Sélectionnez / Select</option>
-                <option value="bapteme">Baptême d'enfant / Child baptism</option>
-                <option value="divorce">Divorce / Annulation / Divorce / Annulment</option>
-                <option value="divorce-remarie">Divorcé(e)-remarié(e) / Divorced-remarried</option>
-                <option value="retour">Retour à l'Église / Return to the Church</option>
-                <option value="catechese">Catéchèse / Catechesis</option>
-                <option value="mariage">Mariage / Marriage</option>
-                <option value="confirmation">Confirmation / Confirmation</option>
-                <option value="confession">Confession / Reconciliation</option>
-                <option value="onction">Onction des malades / Anointing of the sick</option>
-                <option value="aide-medicale">Aide médicale à mourir / Medical assistance in dying</option>
-                <option value="funerailles">Funérailles / Funeral</option>
-                <option value="autre">Autre / Other</option>
-            </select>
+    <option value="">Sélectionnez / Select</option>
+    <option value="bapteme">Baptême d'enfant / Child baptism</option>
+    <option value="mariage">Mariage / Marriage</option>
+    <option value="confirmation">Confirmation / Confirmation</option>
+    <option value="communion">Première communion / First Communion</option>
+    <option value="confession">Confession / Reconciliation</option>
+    <option value="onction">Onction des malades / Anointing of the sick</option>
+    <option value="funerailles">Funérailles / Funeral</option>
+    <option value="divorce">Annulation de mariage / Marriage annulment</option>
+    <option value="divorce-remarie">Divorcé(e)-remarié(e) / Divorced-remarried</option>
+    <option value="retour">Retour à l'Église / Return to the Church</option>
+    <option value="catechese">Catéchèse / Catechesis</option>
+    <option value="aide-medicale">Aide médicale à mourir / Medical assistance in dying</option>
+    <option value="autre">Autre / Other</option>
+</select>
         </div>
 
         <div class="form-group">
@@ -349,6 +350,7 @@ changeLanguage('fr');
 async function loadPays() {
     try {
         const res = await fetch('/api/pays');
+        if (!res.ok) throw new Error('Erreur réseau');
         const pays = await res.json();
         const select = document.getElementById('pays');
         select.innerHTML = '<option value="">Sélectionnez / Select</option>';
@@ -358,8 +360,10 @@ async function loadPays() {
             option.textContent = p;
             select.appendChild(option);
         });
+        console.log('✅ Pays chargés:', pays.length);
     } catch (e) {
-        console.log('Erreur chargement pays:', e);
+        console.error('❌ Erreur chargement pays:', e);
+        document.getElementById('pays').innerHTML = '<option value="">Erreur de chargement</option>';
     }
 }
 loadPays();
