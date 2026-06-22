@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Paroisse AI - Pastorale de soins</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44, #1a1a2e);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #2d2d44, #4a4a6a);
+            padding: 30px;
+            text-align: center;
+        }
+        .badge {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+        }
+        h1 { color: white; margin: 15px 0 5px; font-size: 1.8rem; }
+        .subtitle { color: rgba(255,255,255,0.9); font-size: 14px; }
+        .form-body { padding: 30px; }
+        .info-box {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; }
+        select, input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #4a4a6a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        .success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .ai-response {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #4a4a6a;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        .footer {
+            background: #f9fafb;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .footer a {
+            color: #4a4a6a;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .language-selector {
+            text-align: right;
+            padding: 10px 20px;
+            background: #f0f4ff;
+            border-bottom: 1px solid #ddd;
+        }
+        .language-selector select {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: auto;
+        }
+        .ecosystem {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .ecosystem a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+        }
+        .ecosystem a:hover { text-decoration: underline; }
+        .ecosystem-tag {
+            font-size: 12px;
+            color: #888;
+            margin-top: 6px;
+        }
+        .pastoral-note {
+            background: #fef8e7;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #d4a843;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+
+<!-- Sélecteur de langues -->
+<div class="language-selector">
+    <label for="languageSelector" style="font-weight:bold;margin-right:8px;">🌐</label>
+    <select id="languageSelector">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+    </select>
+</div>
+
+<!-- En-tête -->
+<div class="header">
+    <div class="badge">⛪ Pastorale de soins</div>
+    <h1>Paroisse AI</h1>
+    <div class="subtitle">Diocèse d'Edmundston - Nouveau-Brunswick, Canada</div>
+</div>
+
+<!-- Corps -->
+<div class="form-body">
+
+    <div class="info-box">
+        <div>🕊️</div>
+        <div><strong>Accueil et écoute</strong><br>Une pastorale ferme mais empreinte de soins</div>
+    </div>
+
+    <div class="pastoral-note">
+        <strong>🙏 Vous êtes le bienvenu.</strong><br>
+        Que vous soyez pratiquant régulier, de retour, en questionnement, ou en situation difficile, l'Église vous accueille avec bienveillance.
+    </div>
+
+    <form id="paroisseForm">
+        <div class="form-group">
+            <label for="pays">🌍 Pays</label>
+            <select id="pays" required>
+                <option value="">Sélectionnez / Select</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="diocese">🏛️ Diocèse</label>
+            <input type="text" id="diocese" placeholder="Nom du diocèse" required>
+        </div>
+
+        <div class="form-group">
+            <label for="unite">📋 Unité pastorale / Doyenné</label>
+            <input type="text" id="unite" placeholder="Nom de l'unité pastorale">
+        </div>
+
+        <div class="form-group">
+            <label for="paroisse">⛪ Paroisse</label>
+            <input type="text" id="paroisse" placeholder="Nom de la paroisse" required>
+        </div>
+
+        <div class="form-group">
+            <label for="typeDemande">📋 Type de demande</label>
+            <select id="typeDemande" required>
+                <option value="">Sélectionnez / Select</option>
+                <option value="bapteme">Baptême d'enfant / Child baptism</option>
+                <option value="divorce">Divorce / Annulation / Divorce / Annulment</option>
+                <option value="divorce-remarie">Divorcé(e)-remarié(e) / Divorced-remarried</option>
+                <option value="retour">Retour à l'Église / Return to the Church</option>
+                <option value="catechese">Catéchèse / Catechesis</option>
+                <option value="mariage">Mariage / Marriage</option>
+                <option value="confirmation">Confirmation / Confirmation</option>
+                <option value="confession">Confession / Reconciliation</option>
+                <option value="onction">Onction des malades / Anointing of the sick</option>
+                <option value="aide-medicale">Aide médicale à mourir / Medical assistance in dying</option>
+                <option value="funerailles">Funérailles / Funeral</option>
+                <option value="autre">Autre / Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="contexte">🕊️ Contexte / Context</label>
+            <textarea id="contexte" rows="3" placeholder="Décrivez votre situation... / Describe your situation..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="besoin">🙏 Besoin pastoral / Pastoral need</label>
+            <textarea id="besoin" rows="3" placeholder="Ce que vous recherchez... / What you are looking for..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="nom">🕊️ Nom complet / Full name</label>
+            <input type="text" id="nom" placeholder="Nom et prénom / Full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">📅 Date souhaitée / Desired date</label>
+            <input type="date" id="date" required>
+        </div>
+
+        <button type="submit" id="submitBtn">📩 Envoyer la demande / Submit request</button>
+    </form>
+
+    <div id="result"></div>
+
+    <!-- Écosystème -->
+    <div class="ecosystem">
+        <p style="font-weight: bold; margin-bottom: 8px;">🌐 Découvrez l'écosystème / Discover the ecosystem</p>
+        <div>
+            <a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a>
+            <span style="color:#ccc;">|</span>
+            <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a>
+            <span style="color:#ccc;">|</span>
+            <a href="https://amour-et-verite-app.netlify.app" target="_blank">⛪ Amour & Vérité</a>
+            <span style="color:#ccc;">|</span>
+            <a href="https://supplements-ai.onrender.com" target="_blank">🧪 Suppléments AI</a>
+        </div>
+        <div class="ecosystem-tag">🔗 Confidentiel · Gratuit · Accessible à tous / Confidential · Free · Accessible to all</div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    ⛪ Diocèse d'Edmundston &nbsp;|&nbsp;
+    <a href="/about">À propos / About</a> &nbsp;|&nbsp;
+    <a href="/privacy">Confidentialité / Privacy</a> &nbsp;|&nbsp;
+    <a href="/terms">Conditions / Terms</a> &nbsp;|&nbsp;
+    <a href="/contact">Contact</a>
+</div>
+
+</div></div>
+
+<script>
+// ===== TRADUCTIONS =====
+const translations = {
+    fr: {
+        badge: "⛪ Pastorale de soins",
+        title: "Paroisse AI",
+        subtitle: "Diocèse d'Edmundston - Nouveau-Brunswick, Canada",
+        info_title: "Accueil et écoute",
+        info_text: "Une pastorale ferme mais empreinte de soins",
+        label_pays: "🌍 Pays",
+        label_diocese: "🏛️ Diocèse",
+        label_unite: "📋 Unité pastorale / Doyenné",
+        label_paroisse: "⛪ Paroisse",
+        label_type: "📋 Type de demande",
+        label_contexte: "🕊️ Contexte / Context",
+        label_besoin: "🙏 Besoin pastoral / Pastoral need",
+        label_nom: "🕊️ Nom complet / Full name",
+        label_date: "📅 Date souhaitée / Desired date",
+        button: "📩 Envoyer la demande / Submit request",
+        footer: "⛪ Diocèse d'Edmundston",
+        placeholder_diocese: "Nom du diocèse",
+        placeholder_unite: "Nom de l'unité pastorale",
+        placeholder_paroisse: "Nom de la paroisse",
+        placeholder_contexte: "Décrivez votre situation...",
+        placeholder_besoin: "Ce que vous recherchez...",
+        placeholder_nom: "Nom et prénom / Full name",
+        success: "✅ Votre demande a bien été reçue",
+        error: "❌ Erreur: ",
+        conseil: "Réponse pastorale",
+        pastoral_note: "🙏 Vous êtes le bienvenu. Que vous soyez pratiquant régulier, de retour, en questionnement, ou en situation difficile, l'Église vous accueille avec bienveillance."
+    },
+    en: {
+        badge: "⛪ Pastoral care",
+        title: "Paroisse AI",
+        subtitle: "Diocese of Edmundston - New Brunswick, Canada",
+        info_title: "Welcome and listening",
+        info_text: "A firm pastoral care, yet full of compassion",
+        label_pays: "🌍 Country",
+        label_diocese: "🏛️ Diocese",
+        label_unite: "📋 Pastoral unit / Deanery",
+        label_paroisse: "⛪ Parish",
+        label_type: "📋 Request type",
+        label_contexte: "🕊️ Context",
+        label_besoin: "🙏 Pastoral need",
+        label_nom: "🕊️ Full name",
+        label_date: "📅 Desired date",
+        button: "📩 Submit request",
+        footer: "⛪ Diocese of Edmundston",
+        placeholder_diocese: "Name of the diocese",
+        placeholder_unite: "Name of the pastoral unit",
+        placeholder_paroisse: "Name of the parish",
+        placeholder_contexte: "Describe your situation...",
+        placeholder_besoin: "What you are looking for...",
+        placeholder_nom: "Full name",
+        success: "✅ Your request has been received",
+        error: "❌ Error: ",
+        conseil: "Pastoral response",
+        pastoral_note: "🙏 You are welcome. Whether you are a regular practitioner, returning, questioning, or in a difficult situation, the Church welcomes you with kindness."
+    },
+    es: {
+        badge: "⛪ Pastoral de cuidado",
+        title: "Parroquia AI",
+        subtitle: "Diócesis de Edmundston - Nuevo Brunswick, Canadá",
+        info_title: "Acogida y escucha",
+        info_text: "Una pastoral firme pero llena de compasión",
+        label_pays: "🌍 País",
+        label_diocese: "🏛️ Diócesis",
+        label_unite: "📋 Unidad pastoral / Decanato",
+        label_paroisse: "⛪ Parroquia",
+        label_type: "📋 Tipo de solicitud",
+        label_contexte: "🕊️ Contexto",
+        label_besoin: "🙏 Necesidad pastoral",
+        label_nom: "🕊️ Nombre completo",
+        label_date: "📅 Fecha deseada",
+        button: "📩 Enviar solicitud",
+        footer: "⛪ Diócesis de Edmundston",
+        placeholder_diocese: "Nombre de la diócesis",
+        placeholder_unite: "Nombre de la unidad pastoral",
+        placeholder_paroisse: "Nombre de la parroquia",
+        placeholder_contexte: "Describa su situación...",
+        placeholder_besoin: "Lo que busca...",
+        placeholder_nom: "Nombre completo",
+        success: "✅ Su solicitud ha sido recibida",
+        error: "❌ Error: ",
+        conseil: "Respuesta pastoral"
+    },
+    de: {
+        badge: "⛪ Pastorale Fürsorge",
+        title: "Gemeinde AI",
+        subtitle: "Diözese Edmundston - Neubraunschweig, Kanada",
+        info_title: "Willkommen und Zuhören",
+        info_text: "Eine feste pastorale Fürsorge, doch voller Mitgefühl",
+        label_pays: "🌍 Land",
+        label_diocese: "🏛️ Diözese",
+        label_unite: "📋 Pastorale Einheit / Dekanat",
+        label_paroisse: "⛪ Gemeinde",
+        label_type: "📋 Art der Anfrage",
+        label_contexte: "🕊️ Kontext",
+        label_besoin: "🙏 Pastorales Anliegen",
+        label_nom: "🕊️ Vollständiger Name",
+        label_date: "📅 Gewünschtes Datum",
+        button: "📩 Anfrage senden",
+        footer: "⛪ Diözese Edmundston",
+        placeholder_diocese: "Name der Diözese",
+        placeholder_unite: "Name der pastoralen Einheit",
+        placeholder_paroisse: "Name der Gemeinde",
+        placeholder_contexte: "Beschreiben Sie Ihre Situation...",
+        placeholder_besoin: "Was Sie suchen...",
+        placeholder_nom: "Vor- und Nachname",
+        success: "✅ Ihre Anfrage wurde empfangen",
+        error: "❌ Fehler: ",
+        conseil: "Pastorale Antwort"
+    },
+    ar: {
+        badge: "⛪ الرعاية الرعوية",
+        title: "الرعية الذكاء الاصطناعي",
+        subtitle: "أبرشية إدموندستون - نيو برونزويك، كندا",
+        info_title: "الترحيب والاستماع",
+        info_text: "رعوية ثابتة ولكنها مليئة بالرحمة",
+        label_pays: "🌍 البلد",
+        label_diocese: "🏛️ الأبرشية",
+        label_unite: "📋 الوحدة الرعوية / العمادة",
+        label_paroisse: "⛪ الرعية",
+        label_type: "📋 نوع الطلب",
+        label_contexte: "🕊️ السياق",
+        label_besoin: "🙏 الحاجة الرعوية",
+        label_nom: "🕊️ الاسم الكامل",
+        label_date: "📅 التاريخ المطلوب",
+        button: "📩 إرسال الطلب",
+        footer: "⛪ أبرشية إدموندستون",
+        placeholder_diocese: "اسم الأبرشية",
+        placeholder_unite: "اسم الوحدة الرعوية",
+        placeholder_paroisse: "اسم الرعية",
+        placeholder_contexte: "صف وضعك...",
+        placeholder_besoin: "ما تبحث عنه...",
+        placeholder_nom: "الاسم الكامل",
+        success: "✅ تم استلام طلبك",
+        error: "❌ خطأ: ",
+        conseil: "الرد الرعوي"
+    }
+};
+
+function changeLanguage(lang) {
+    const t = translations[lang] || translations.fr;
+    document.querySelector('.badge').textContent = t.badge;
+    document.querySelector('h1').textContent = t.title;
+    document.querySelector('.subtitle').textContent = t.subtitle;
+    document.querySelector('.info-box strong').textContent = t.info_title;
+    document.querySelector('.info-box p').textContent = t.info_text;
+    document.querySelector('label[for="pays"]').textContent = t.label_pays;
+    document.querySelector('label[for="diocese"]').textContent = t.label_diocese;
+    document.querySelector('label[for="unite"]').textContent = t.label_unite;
+    document.querySelector('label[for="paroisse"]').textContent = t.label_paroisse;
+    document.querySelector('label[for="typeDemande"]').textContent = t.label_type;
+    document.querySelector('label[for="contexte"]').textContent = t.label_contexte;
+    document.querySelector('label[for="besoin"]').textContent = t.label_besoin;
+    document.querySelector('label[for="nom"]').textContent = t.label_nom;
+    document.querySelector('label[for="date"]').textContent = t.label_date;
+    document.getElementById('submitBtn').textContent = t.button;
+    document.querySelector('.footer').textContent = t.footer;
+    document.getElementById('diocese').placeholder = t.placeholder_diocese;
+    document.getElementById('unite').placeholder = t.placeholder_unite;
+    document.getElementById('paroisse').placeholder = t.placeholder_paroisse;
+    document.getElementById('contexte').placeholder = t.placeholder_contexte;
+    document.getElementById('besoin').placeholder = t.placeholder_besoin;
+    document.getElementById('nom').placeholder = t.placeholder_nom;
+    document.querySelector('.pastoral-note').innerHTML = t.pastoral_note;
+}
+
+document.getElementById('languageSelector').addEventListener('change', function() {
+    changeLanguage(this.value);
+});
+changeLanguage('fr');
+
+// ===== CHARGER LES PAYS =====
+async function loadPays() {
+    try {
+        const res = await fetch('/api/pays');
+        const pays = await res.json();
+        const select = document.getElementById('pays');
+        select.innerHTML = '<option value="">Sélectionnez / Select</option>';
+        pays.forEach(p => {
+            const option = document.createElement('option');
+            option.value = p;
+            option.textContent = p;
+            select.appendChild(option);
+        });
+    } catch (e) {
+        console.log('Erreur chargement pays:', e);
+    }
+}
+loadPays();
+
+// ===== FORMULAIRE =====
+const form = document.getElementById('paroisseForm');
+const resultDiv = document.getElementById('result');
+const submitBtn = document.getElementById('submitBtn');
+
+form.onsubmit = async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi... / Sending...';
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'success';
+    resultDiv.innerHTML = '⏳ Envoi en cours... / Sending...';
+
+    const data = {
+        pays: document.getElementById('pays').value,
+        diocese: document.getElementById('diocese').value,
+        unite: document.getElementById('unite').value,
+        paroisse: document.getElementById('paroisse').value,
+        typeDemande: document.getElementById('typeDemande').value,
+        contexte: document.getElementById('contexte').value,
+        besoin: document.getElementById('besoin').value,
+        nom: document.getElementById('nom').value,
+        date: document.getElementById('date').value,
+        language: document.getElementById('languageSelector').value
+    };
+
+    try {
+        const res = await fetch('/api/submit-paroisse-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        const currentLang = document.getElementById('languageSelector').value;
+        const t = translations[currentLang] || translations.fr;
+        let aiHtml = '';
+        if (result.aiResponse) {
+            aiHtml = '<div class="ai-response"><strong>🤖 ' + t.conseil + ' :</strong><br><br>' + result.aiResponse.replace(/\n/g, '<br>') + '</div>';
+        }
+        resultDiv.innerHTML = '<strong>' + t.success + '</strong><br>Référence: ' + result.reference + '<br>Date: ' + new Date(result.date).toLocaleString() + aiHtml;
+        form.reset();
+    } catch (err) {
+        const currentLang = document.getElementById('languageSelector').value;
+        const t = translations[currentLang] || translations.fr;
+        resultDiv.className = 'error';
+        resultDiv.innerHTML = (t.error || '❌ Erreur: ') + err.message;
+    } finally {
+        submitBtn.disabled = false;
+        const currentLang = document.getElementById('languageSelector').value;
+        const t = translations[currentLang] || translations.fr;
+        submitBtn.textContent = t.button || '📩 Envoyer la demande / Submit request';
+    }
+};
+</script>
+</body>
+</html>
